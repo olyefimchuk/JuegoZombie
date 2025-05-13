@@ -1,24 +1,24 @@
 
 public class Zombie {
-    private int puntosVidaActuales;
+    private int puntosVida;
     private int puntosAtaque;
 
     /**
-     * @param puntosVidaActuales
+     * @param puntosVida
      * @param puntosAtaque
      */
     // Constructor
-    public Zombie(int puntosVidaActuales, int puntosAtaque) {
-        this.puntosVidaActuales = puntosVidaActuales;
+    public Zombie(int puntosVida, int puntosAtaque) {
+        this.puntosVida = puntosVida;
         this.puntosAtaque = puntosAtaque;
     }
 
     /**
      *
-      * @param puntosVidaActuales setter de los puntos de vida actuales
+      * @param puntosVida setter de los puntos de vida actuales
      */
-    public void setPuntosVidaActuales(int puntosVidaActuales) {
-        this.puntosVidaActuales = puntosVidaActuales;
+    public void setpuntosVida(int puntosVida) {
+        this.puntosVida = puntosVida;
     }
 
     /**
@@ -31,10 +31,10 @@ public class Zombie {
 
     /**
      *
-     * @return puntosVidaActuales
+     * @return puntosVida
      */
-    public int getPuntosVidaActuales() {
-        return puntosVidaActuales;
+    public int getpuntosVida() {
+        return puntosVida;
     }
 
     /**

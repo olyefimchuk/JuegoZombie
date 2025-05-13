@@ -25,13 +25,16 @@ public class Dado {
      *
      * @return resultado del dado
      */
-    @Override
-    public String toString() {
-        return dado + "";
+    public int getDado() {
+        return dado;
     }
 
-    public static void main(String[] args) {
-        Dado d = new Dado();
-        System.out.println("Resultado= " + d);
+    /**
+     *
+     * @return muestra por pantalla el resultado del dado
+     */
+    public String mostrarResultado() {
+        return "Resultado del dado: " + dado;
     }
+
 }
