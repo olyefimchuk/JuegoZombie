@@ -13,12 +13,18 @@ public class Zombie {
         this.puntosAtaque = puntosAtaque;
     }
 
-    // Setter de numMaxVida
+    /**
+     *
+      * @param puntosVidaActuales setter de los puntos de vida actuales
+     */
     public void setPuntosVidaActuales(int puntosVidaActuales) {
         this.puntosVidaActuales = puntosVidaActuales;
     }
 
-    // Setter de puntosAtaque
+    /**
+     *
+     * @param puntosAtaque setter de los puntos de ataque del zombie
+     */
     public void setPuntosAtaque(int puntosAtaque) {
         this.puntosAtaque = puntosAtaque;
     }

@@ -1,4 +1,3 @@
-//Clase superviviente que hereda de zombie
 
 public final class Superviviente {
     private final int numMaxVida = 20;
@@ -59,10 +58,8 @@ public final class Superviviente {
     //SETTERS
     /**
      *
-     * @param puntosVidaActuales
+     * @param puntosVidaActuales Setter de puntosVidaActuales
      */
-    // Setter de numMaxVida
-    @Override
     public void setPuntosVidaActuales(int puntosVidaActuales) {
         this.puntosVidaActuales = puntosVidaActuales;
     }
@@ -75,25 +72,72 @@ public final class Superviviente {
         this.puntosAtaque = puntosAtaque;
     }
 
+    /**
+     *
+     * @param llevaBotiquin Set de LlevaBotiquin
+     */
 
-    // Setter de llevaBotiquin
     public void setLlevaBotiquin(boolean llevaBotiquin) {
         this.llevaBotiquin = llevaBotiquin;
     }
 
-
-    // Setter de cantArmas
+    /**
+     *
+     * @param cantArmas Setter de cantidad de armas
+     */
     public void setCantArmas(int cantArmas) {
         this.cantArmas = cantArmas;
     }
 
-
-    // Setter de cantArmas
+    /**
+     *
+     * @param cantProteccion Setter de cantidad de protección
+     */
     public void setCantProteccion(int cantProteccion) {
         this.cantProteccion = cantProteccion;
     }
 
+    public boolean isLlevaBotiquin() {
+        return llevaBotiquin;
+    }
+    //GETTERS
+    /**
+     *
+     *  @return get para los puntos de vida actuales
+     */
+    public int getPuntosVidaActuales() {
+        return puntosVidaActuales;
+    }
 
+    /**
+     *
+     * @return get para los puntos de ataque
+     */
+    public int getPuntosAtaque() {
+        return puntosAtaque;
+    }
 
+    /**
+     *
+     * @return Get para la cantidad de armas
+     */
+    public int getCantArmas() {
+        return cantArmas;
+    }
 
+    /**
+     *
+     * @return Get para la cantidad de protección
+     */
+    public int getCantProteccion() {
+        return cantProteccion;
+    }
+
+    /**
+     *
+     * @return 
+     */
+    public boolean getLLevaBotiquin(){
+        return llevaBotiquin;
+    }
 }
