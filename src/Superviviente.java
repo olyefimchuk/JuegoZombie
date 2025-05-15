@@ -49,6 +49,9 @@ public final class Superviviente {
     public void currarse() {
         if (llevaBotiquin) {
             puntosVidaActuales += 4;
+            if (puntosVidaActuales > numMaxVida) { // si puntosVidaActuales > 20 se asigna 20
+                puntosVidaActuales = numMaxVida;
+            }
         }
         else {
             System.out.println("No tienes botiquin");

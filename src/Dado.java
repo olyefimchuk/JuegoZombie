@@ -21,6 +21,19 @@ public class Dado {
         dado = rand.nextInt(caras) + 1;
     }
 
+
+    /**
+     *
+     * @param num
+     * @return el resultado del dado
+     */
+    public int lanzarDado(int num) {
+        int numero;
+        numero = rand.nextInt(num) + 1;
+        return numero;
+    }
+
+
     /**
      *
      * @return resultado del dado

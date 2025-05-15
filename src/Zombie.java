@@ -14,6 +14,23 @@ public class Zombie {
     }
 
     /**
+     * Metodo para comprobar si el zombie está vivo
+     * @return true si zombie está vivo y false en caso contrario
+     */
+    public boolean estaVivo() {
+        if (puntosVida <= 0) return false;
+        return true;
+    }
+
+    // recibir ataque
+    public int recibirAtaque(int ataque) {
+        return puntosVida - ataque;
+    }
+
+    // realizar ataque
+
+
+    /**
      *
       * @param puntosVida setter de los puntos de vida actuales
      */
