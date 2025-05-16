@@ -14,8 +14,30 @@ public class Juego {
     }
 
 
-    // Hay que hacer los metodos:
-    // avanzarHabitacionSiguente() - metodo para pasar a habitacion siguente
+    public void avanzarHabitacionSiguente(Superviviente jugador) {
+        habitacionActual++;
+        numIntentoBusqueda = 3;
+        numZombieHabitacion = 1;
+        System.out.println("Has entrado a habitacion siguente");
+        comprobarFinDejuego(jugador);
+    }
+
+
+    public void elegirAccionJugador() {
+
+    }
+
+    // numeroAlearorio(2) + 2 + (Habitación-1)
+    public void combatirContraZombie() {
+        // 1. Se crea un zombie
+        int puntosVida = dado.lanzarDado(2) + 2 + (habitacionActual - 1); // (numero aleatorio entre 0 y 1) + 2 + (habitacionActual - 1)
+        int puntosAtaque = dado.lanzarDado(2) + 2 + (habitacionActual - 1); // (numero aleatorio entre 0 y 1) + 2 + (habitacionActual - 1)
+        Zombie zombie = new Zombie(puntosVida, puntosAtaque);
+        
+        // 2.
+    }
+
+
     // combatirContraZombie() - metodo para combatir contra un zombie
     // elegirAccionJugador() - metodo para elegir acciones
 

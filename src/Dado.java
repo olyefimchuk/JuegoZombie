@@ -24,11 +24,11 @@ public class Dado {
     /**
      *
      * @param num
-     * @return el resultado del dado
+     * @return el resultado del dado entre 0 y num
      */
     public int lanzarDado(int num) {
         int numero;
-        numero = rand.nextInt(num) + 1;
+        numero = rand.nextInt(num);
         return numero;
     }
 
