@@ -4,10 +4,8 @@ public class Juego {
     private int habitacionActual;
     private int numZombieHabitacion;
 
-    /**
-     *
-     * @param numHabitacion
-     */
+    Dado dado = new Dado();
+
     public Juego(int numHabitacion) {
         this.numHabitacion = numHabitacion;
         this.numIntentoBusqueda = 3;
@@ -19,12 +17,64 @@ public class Juego {
     // Hay que hacer los metodos:
     // avanzarHabitacionSiguente() - metodo para pasar a habitacion siguente
     // combatirContraZombie() - metodo para combatir contra un zombie
-    // buscar() - metodo para buscar por la habitacion
     // elegirAccionJugador() - metodo para elegir acciones
-    // comprobarFinDeJuego() - devuelve "true" si puntos de vida del jugador es 0 o si el jugador ha salido de la mansion y devuelve "false" en caso contrario y el juego continúa (true - fin de juego, false - el juego continúa)
 
 
 
+
+    
+
+    /**
+     * metodo Buscar(). (busca por la habitación)
+     * @param jugador
+     * ● 1-75: Hacemos ruido (ver resultados de ruido).
+     * ● 76-90: Encontramos un botiquín.
+     * ● 91-95: Encontramos una protección (+1).
+     * ● 96-100: Encontramos un arma (+1).
+     */
+    public void buscar(Superviviente jugador){
+        int resultadoDado = dado.lanzarDado(101);
+        numIntentoBusqueda --;
+        if (resultadoDado <= 75) {
+            System.out.println("Has hecho ruido...");
+            int hacerRuido= dado.lanzarDado(101);
+            if (hacerRuido <= 40) {
+                System.out.println("No ha pasado nada...");
+            } else if (hacerRuido <=80) {
+                System.out.println("Hay un zombie");
+                numZombieHabitacion++;
+            }else{
+                System.out.println("Hay 2 zombies");
+                numZombieHabitacion += 2;
+            }
+        } else if (resultadoDado <=90) {
+            if(!jugador.getLLevaBotiquin()){
+                System.out.println("Has encontrado un botiquin");
+                jugador.setLlevaBotiquin(true);
+            }else{
+                System.out.println("Has encontrado un botiqun, pero ya tienes uno. No lo puedes llevar. ");
+            }
+        } else if (resultadoDado <= 95) {
+            System.out.println("Has encotrado protección");
+            jugador.setCantProteccion(jugador.getCantProteccion() + 1);
+        }else {
+            System.out.println("Has encontrado un arma. ");
+            jugador.setCantArmas(jugador.getCantArmas() + 1);
+        }
+
+    }
+
+    /**
+     * ComprobarFinDeJuego()
+     * @param jugador
+     * @return devuele true si el jugador tiene menos de 0 puntos de vida o si ya no hay mas habitaciones y false en caso contrario (continua el juego).
+     */
+    public boolean comprobarFinDejuego(Superviviente jugador){
+         if(jugador.getPuntosVidaActuales() <= 0 || habitacionActual > numHabitacion) {
+             return true;
+         }
+         return false;
+    }
     //SETTERS
     /**
      *

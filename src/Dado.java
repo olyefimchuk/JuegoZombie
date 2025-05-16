@@ -21,7 +21,6 @@ public class Dado {
         dado = rand.nextInt(caras) + 1;
     }
 
-
     /**
      *
      * @param num
@@ -32,7 +31,6 @@ public class Dado {
         numero = rand.nextInt(num) + 1;
         return numero;
     }
-
 
     /**
      *

@@ -1,4 +1,3 @@
-
 public final class Superviviente {
     private final int numMaxVida = 20;
     private int puntosVidaActuales;
@@ -8,7 +7,6 @@ public final class Superviviente {
     private int cantProteccion;
 
     /**
-     *
      * @param numMaxVida
      * @param puntosVidaActuales
      * @param puntosAtaque
@@ -16,6 +14,11 @@ public final class Superviviente {
      * @param cantArmas
      * @param cantProteccion
      */
+
+    int puntosVidaZombie = dado.lanzarDado(2) + 2 + (get - 1); // (numero aleatorio entre 0 y 1) + 2 + (habitacionActual - 1)
+    int puntosAtaqueZombie = dado.lanzarDado(2) + 2 + (habitacionActual - 1); // (numero aleatorio entre 0 y 1) + 2 + (habitacionActual - 1)
+    Zombie zombie = new Zombie(puntosVidaZombie, puntosAtaqueZombie);
+
 
     public Superviviente() {
         this.puntosVidaActuales = 20;
@@ -25,28 +28,49 @@ public final class Superviviente {
         this.cantProteccion = 0;
     }
 
-    // Constructor
+    /**
+     * Constructor de Superviviente
+     * @param puntosVidaActuales
+     * @param puntosAtaque
+     * @param llevaBotiquin
+     * @param cantArmas
+     * @param cantProteccion
+     */
     public Superviviente(int puntosVidaActuales, int puntosAtaque, boolean llevaBotiquin, int cantArmas, int cantProteccion) {
         this.puntosVidaActuales = puntosVidaActuales;
         this.puntosAtaque = puntosAtaque;
         this.llevaBotiquin = llevaBotiquin;
         this.cantArmas = cantArmas;
         this.cantProteccion = cantProteccion;
+
+
     }
 
-    // recibir ataque
+    /**
+     *
+     * @param ataque
+     * @return devuelve el daño que recibe el superviviente
+     */
     public int recibirAtaque(int ataque) {
         return puntosVidaActuales - ataque;
     }
 
-    // realizar ataque
+    /**
+     *
+     * @return metodo realizar ataque utiliza Dado para calcular el daño
+     */
+
+    public int realizarAtaque() {
+        return (puntosAtaque + cantArmas) - puntosVidaZombie;
+
+    }
 
 
     /**
-     * función Currarse
+     * función Curarse
      * añade 4 puntos de vida
      */
-    public void currarse() {
+    public void curarse() {
         if (llevaBotiquin) {
             puntosVidaActuales += 4;
             if (puntosVidaActuales > numMaxVida) { // si puntosVidaActuales > 20 se asigna 20
@@ -138,7 +162,7 @@ public final class Superviviente {
 
     /**
      *
-     * @return 
+     * @return devuelve si el superviviente lleva o no botiquín
      */
     public boolean getLLevaBotiquin(){
         return llevaBotiquin;
