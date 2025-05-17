@@ -6,18 +6,7 @@ public final class Superviviente {
     private int cantArmas;
     private int cantProteccion;
 
-    /**
-     * @param numMaxVida
-     * @param puntosVidaActuales
-     * @param puntosAtaque
-     * @param llevaBotiquin
-     * @param cantArmas
-     * @param cantProteccion
-     */
-
-    int puntosVidaZombie = dado.lanzarDado(2) + 2 + (get - 1); // (numero aleatorio entre 0 y 1) + 2 + (habitacionActual - 1)
-    int puntosAtaqueZombie = dado.lanzarDado(2) + 2 + (habitacionActual - 1); // (numero aleatorio entre 0 y 1) + 2 + (habitacionActual - 1)
-    Zombie zombie = new Zombie(puntosVidaZombie, puntosAtaqueZombie);
+    Dado dado = new Dado();
 
 
     public Superviviente() {
@@ -48,7 +37,7 @@ public final class Superviviente {
 
     /**
      *
-     * @param ataque
+     * @param ataque número de ataque
      * @return devuelve el daño que recibe el superviviente
      */
     public int recibirAtaque(int ataque) {
@@ -61,7 +50,8 @@ public final class Superviviente {
      */
 
     public int realizarAtaque() {
-        return (puntosAtaque + cantArmas) - puntosVidaZombie;
+        int resultado = dado.lanzarDado()
+        return resultado;
 
     }
 
