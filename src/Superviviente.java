@@ -50,9 +50,8 @@ public final class Superviviente {
      */
 
     public int realizarAtaque() {
-        int resultado = dado.lanzarDado()
+        int resultado = dado.lanzarDado(puntosAtaque) + cantArmas;
         return resultado;
-
     }
 
 
@@ -71,6 +70,17 @@ public final class Superviviente {
             System.out.println("No tienes botiquin");
         }
     }
+
+
+    /**
+     * Metodo para comprobar si el jugador está vivo
+     * @return true si jugador está vivo y false en caso contrario
+     */
+    public boolean estaVivo() {
+        if (puntosVidaActuales <= 0) return false;
+        return true;
+    }
+
 
     //SETTERS
     /**

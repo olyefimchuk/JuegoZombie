@@ -3,7 +3,7 @@ public class Zombie {
     private int puntosVida;
     private int puntosAtaque;
 
-    Superviviente jugador = new Superviviente();
+    Dado dado = new Dado();
 
     /**
      * @param puntosVida
@@ -37,7 +37,7 @@ public class Zombie {
      * @return devuelve el daño que hace el zombie pero como no tiene armas es solo el del dado
      */
     public int realizarAtaque() {
-        return puntosAtaque - jugador.getPuntosVidaActuales();
+        return dado.lanzarDado(puntosAtaque);
     }
 
 

@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class Juego {
     private int numHabitacion;
     private int numIntentoBusqueda;
@@ -5,6 +7,7 @@ public class Juego {
     private int numZombieHabitacion;
 
     Dado dado = new Dado();
+
 
     public Juego(int numHabitacion) {
         this.numHabitacion = numHabitacion;
@@ -28,20 +31,86 @@ public class Juego {
     }
 
     // numeroAlearorio(2) + 2 + (Habitación-1)
-    public void combatirContraZombie() {
+    public void combatirContraZombie(Superviviente jugador) {
         // 1. Se crea un zombie
         int puntosVida = dado.lanzarDado(2) + 2 + (habitacionActual - 1); // (numero aleatorio entre 0 y 1) + 2 + (habitacionActual - 1)
         int puntosAtaque = dado.lanzarDado(2) + 2 + (habitacionActual - 1); // (numero aleatorio entre 0 y 1) + 2 + (habitacionActual - 1)
         Zombie zombie = new Zombie(puntosVida, puntosAtaque);
         
         // 2.
+        int ronda = 1;
+
+        while(jugador.estaVivo() || zombie.estaVivo()) {
+
+        }
     }
 
 
     // combatirContraZombie() - metodo para combatir contra un zombie
     // elegirAccionJugador() - metodo para elegir acciones
 
+    /**
+     * Este es el menú de eleccion.
+     * En el menú encontramos 4 opciones
+     * 1 combatir
+     * 2 buscar
+     * 3 avanzar
+     * 4 curarse
+     * @param jugador
+     */
+    public void elegirAccionJugador(Superviviente jugador) {
+        Scanner sc = new Scanner(System.in);
+        boolean accionValida = false;
 
+        while (!accionValida) {
+            System.out.println("---Elige una acción---");
+            System.out.println("1 -> Combatir");
+            System.out.println("2 -> Buscar");
+            System.out.println("3 -> Avanzar");
+            System.out.println("4 -> Curarse");
+            System.out.println("Introduce el número de la acción: ");
+
+            int opcion = sc.nextInt();
+
+            switch (opcion) {
+                case 1 ->{
+                    if (numZombieHabitacion > 0) {
+                        combatirContraZombie();
+                        accionValida = true;
+                    }else{
+                        System.out.println("No hay zombies en esta habitacón para combatir.");
+                    }
+                }
+                case 2 ->{
+                    if (numIntentoBusqueda > 0 ){
+                        buscar(jugador);
+                        accionValida = true;
+                    }else{
+                        System.out.println("Ya no puedes buscar más en esta habitación.");
+                    }
+                }
+                case 3 ->{
+                    if (numZombieHabitacion == 0) {
+                        avanzarHabitacionSiguente(jugador);
+                        accionValida = true;
+                    }else{
+                        System.out.println("Aun hay zombies. No puedes avanzar. ");
+                    }
+                }
+                case 4 ->{
+                    if (jugador.getLLevaBotiquin()) {
+                        jugador.curarse();
+                        jugador.setLlevaBotiquin(false); // se consume el botiquín
+                        System.out.println("Te has curado. Vida actual: " + jugador.getPuntosVidaActuales());
+                        accionValida = true;
+                    } else {
+                        System.out.println("No tienes un botiquín para curarte.");
+                    }
+                }
+                default -> System.out.println("Opcion invalida. Elige una entre el 1 y el 4. ");
+            }
+        }
+    }
 
 
     
