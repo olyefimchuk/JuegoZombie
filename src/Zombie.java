@@ -30,7 +30,8 @@ public class Zombie {
      * @return devuelve el daño que recibe el zombie
      */
     public int recibirAtaque(int ataque) {
-        return puntosVida - ataque;
+        puntosVida -= ataque;
+        return puntosVida;
     }
 
     /**

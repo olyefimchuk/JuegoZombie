@@ -21,15 +21,14 @@ public class Juego {
         habitacionActual++;
         numIntentoBusqueda = 3;
         numZombieHabitacion = 1;
-        System.out.println("Has entrado a habitacion siguente");
         comprobarFinDejuego(jugador);
     }
 
 
-    public void elegirAccionJugador() {
-
-    }
-
+    /**
+     * metodo para combatir contra zombie
+     * @param jugador
+     */
     // numeroAlearorio(2) + 2 + (Habitación-1)
     public void combatirContraZombie(Superviviente jugador) {
         // 1. Se crea un zombie
@@ -40,14 +39,30 @@ public class Juego {
         // 2.
         int ronda = 1;
 
-        while(jugador.estaVivo() || zombie.estaVivo()) {
+        System.out.println("El zombie tiene " + zombie.getPuntosAtaque() + " puntos de ataque.");
+        System.out.println("El zombie tiene " + zombie.getpuntosVida() + " puntos de vida.");
 
+        while(jugador.estaVivo() && zombie.estaVivo()) {
+            System.out.println(">> RONDA: " + ronda + ":");
+
+            int puntosAtaqueJugador = jugador.realizarAtaque();
+            System.out.println("> El superviviente ataca con valor " + puntosAtaqueJugador);
+            zombie.recibirAtaque(puntosAtaqueJugador);
+            if (zombie.estaVivo()) {
+                int puntosAtaqueZombie = zombie.realizarAtaque();
+                System.out.println("> El zombie ataca con valor " + puntosAtaqueZombie);
+                jugador.recibirAtaque(puntosAtaqueZombie);
+            }
+            else {
+                System.out.println("Has eliminado al zombie.");
+            }
+            ronda++;
         }
+        if (!jugador.estaVivo()) {
+            System.out.println("¡HAS MUERTO! FIN DEL JUEGO");
+        }
+        numZombieHabitacion--;
     }
-
-
-    // combatirContraZombie() - metodo para combatir contra un zombie
-    // elegirAccionJugador() - metodo para elegir acciones
 
     /**
      * Este es el menú de eleccion.
@@ -63,19 +78,20 @@ public class Juego {
         boolean accionValida = false;
 
         while (!accionValida) {
-            System.out.println("---Elige una acción---");
-            System.out.println("1 -> Combatir");
-            System.out.println("2 -> Buscar");
-            System.out.println("3 -> Avanzar");
-            System.out.println("4 -> Curarse");
-            System.out.println("Introduce el número de la acción: ");
+            System.out.println("* ELIGE UNA DE LAS SIGUIENTES ACCIONES:");
+            System.out.println("1. COMBATIR CONTRA UN ZOMBI.");
+            System.out.println("2. BUSCAR POR LA HABITACIÓN (" + numIntentoBusqueda + " INTENTOS). ");
+            System.out.println("3. AVANZAR A OTRA HABITACIÓN.");
+            System.out.println("4. CURARSE");
+            System.out.println("----------------------------------------------------------------------------------------");
+            System.out.println("> OPCIÓN:");
 
             int opcion = sc.nextInt();
 
             switch (opcion) {
                 case 1 ->{
                     if (numZombieHabitacion > 0) {
-                        combatirContraZombie();
+                        combatirContraZombie(jugador);
                         accionValida = true;
                     }else{
                         System.out.println("No hay zombies en esta habitacón para combatir.");

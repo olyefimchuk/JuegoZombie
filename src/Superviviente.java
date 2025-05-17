@@ -41,7 +41,8 @@ public final class Superviviente {
      * @return devuelve el daño que recibe el superviviente
      */
     public int recibirAtaque(int ataque) {
-        return puntosVidaActuales - ataque;
+        puntosVidaActuales -= ataque;
+        return puntosVidaActuales;
     }
 
     /**
@@ -50,7 +51,7 @@ public final class Superviviente {
      */
 
     public int realizarAtaque() {
-        int resultado = dado.lanzarDado(puntosAtaque) + cantArmas;
+        int resultado = (dado.lanzarDado(puntosAtaque) + 1) + cantArmas;
         return resultado;
     }
 
