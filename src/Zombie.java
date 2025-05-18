@@ -1,4 +1,6 @@
-
+/**
+ * clase Zombie
+ */
 public class Zombie {
     private int puntosVida;
     private int puntosAtaque;
@@ -25,7 +27,7 @@ public class Zombie {
     }
 
     /**
-     *
+     * metodo recibirAtaque
      * @param ataque
      * @return devuelve el daño que recibe el zombie
      */
@@ -35,23 +37,27 @@ public class Zombie {
     }
 
     /**
+     * metodo realizarAtaque
      * @return devuelve el daño que hace el zombie pero como no tiene armas es solo el del dado
      */
     public int realizarAtaque() {
         return dado.lanzarDado(puntosAtaque);
     }
 
+    /**
+     * SETTERS
+     */
 
     /**
-     *
-      * @param puntosVida setter de los puntos de vida actuales
+     *  Set puntos de vida del zombie
+     * @param puntosVida setter de los puntos de vida actuales
      */
     public void setpuntosVida(int puntosVida) {
         this.puntosVida = puntosVida;
     }
 
     /**
-     *
+     *  Set puntos de ataque del zombie
      * @param puntosAtaque setter de los puntos de ataque del zombie
      */
     public void setPuntosAtaque(int puntosAtaque) {
@@ -59,7 +65,11 @@ public class Zombie {
     }
 
     /**
-     *
+     * GETTERS
+     */
+
+    /**
+     *  get puntos de vida del zombie
      * @return puntosVida
      */
     public int getpuntosVida() {
@@ -67,7 +77,7 @@ public class Zombie {
     }
 
     /**
-     *
+     *  get puntos de ataque del zombie
      * @return puntosAtaque
      */
     public int getPuntosAtaque() {

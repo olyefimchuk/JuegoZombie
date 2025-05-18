@@ -59,16 +59,21 @@ public final class Superviviente {
     /**
      * función Curarse
      * añade 4 puntos de vida
+     * Si hay zombies en la habitacion no deja curarse
      */
-    public void curarse() {
-        if (llevaBotiquin) {
-            puntosVidaActuales += 4;
-            if (puntosVidaActuales > numMaxVida) { // si puntosVidaActuales > 20 se asigna 20
-                puntosVidaActuales = numMaxVida;
+    public void curarse(Juego juego) {
+        if (juego.getNumZombieHabitacion() > 0) {
+            System.out.println("No puedes curarte, hay zombies en la habitacion");
+            return;
+        }else{
+            if (llevaBotiquin) {
+                puntosVidaActuales += 4;
+                if (puntosVidaActuales > numMaxVida) { // si puntosVidaActuales > 20 se asigna 20
+                    puntosVidaActuales = numMaxVida;
+                }
+            } else {
+                System.out.println("No tienes botiquin");
             }
-        }
-        else {
-            System.out.println("No tienes botiquin");
         }
     }
 
@@ -82,10 +87,9 @@ public final class Superviviente {
         return true;
     }
 
-
     //SETTERS
     /**
-     *
+     *  Set puntosVidaActuales
      * @param puntosVidaActuales Setter de puntosVidaActuales
      */
     public void setPuntosVidaActuales(int puntosVidaActuales) {
@@ -93,7 +97,7 @@ public final class Superviviente {
     }
 
     /**
-     *
+     *  Set PuntosAtaque
      * @param puntosAtaque Set de puntos de ataque
      */
     public void setPuntosAtaque(int puntosAtaque) {
@@ -101,16 +105,15 @@ public final class Superviviente {
     }
 
     /**
-     *
+     *  set LlevaBotiquin
      * @param llevaBotiquin Set de LlevaBotiquin
      */
-
     public void setLlevaBotiquin(boolean llevaBotiquin) {
         this.llevaBotiquin = llevaBotiquin;
     }
 
     /**
-     *
+     *  set CantArmas
      * @param cantArmas Setter de cantidad de armas
      */
     public void setCantArmas(int cantArmas) {
@@ -118,19 +121,23 @@ public final class Superviviente {
     }
 
     /**
-     *
+     *  set CantProteccion
      * @param cantProteccion Setter de cantidad de protección
      */
     public void setCantProteccion(int cantProteccion) {
         this.cantProteccion = cantProteccion;
     }
 
+    /**
+     *  Metodo llevaBotiquin
+     * @return devuelve si lleva o no botiquin
+     */
     public boolean isLlevaBotiquin() {
         return llevaBotiquin;
     }
     //GETTERS
     /**
-     *
+     *  get PuntosVidaActuales
      *  @return get para los puntos de vida actuales
      */
     public int getPuntosVidaActuales() {
@@ -138,7 +145,7 @@ public final class Superviviente {
     }
 
     /**
-     *
+     *  get puntos ataque
      * @return get para los puntos de ataque
      */
     public int getPuntosAtaque() {
@@ -146,7 +153,7 @@ public final class Superviviente {
     }
 
     /**
-     *
+     *  get cant armas
      * @return Get para la cantidad de armas
      */
     public int getCantArmas() {
@@ -154,7 +161,7 @@ public final class Superviviente {
     }
 
     /**
-     *
+     *  get cant proteccion
      * @return Get para la cantidad de protección
      */
     public int getCantProteccion() {
@@ -162,7 +169,7 @@ public final class Superviviente {
     }
 
     /**
-     *
+     *  get lleva botiquin
      * @return devuelve si el superviviente lleva o no botiquín
      */
     public boolean getLLevaBotiquin(){

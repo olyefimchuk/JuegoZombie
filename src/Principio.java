@@ -13,7 +13,7 @@ public class Principio {
         do {
             System.out.println("----------------------------------------------------------------------------------------");
             System.out.println("> OPCIÓN:");
-            opcion = sc.nextInt();
+            opcion = Juego.pedirNumero(sc);
         }while (opcion != 1 && opcion != 2);
 
 
@@ -31,7 +31,7 @@ public class Principio {
             System.out.println("** PV: " + jugador.getPuntosVidaActuales() + " #MAX(20); ARMAS: " + jugador.getCantArmas() + "; PROTECCIÓN: " + jugador.getCantProteccion());
             System.out.println("** LA HABITACIÓN " + juego.getHabitacionActual() + " CONTIENE: " + juego.getNumZombieHabitacion() + " ZOMBIES.");
 
-            juego.elegirAccionJugador(jugador);
+            juego.elegirAccionJugador(jugador, juego);
 
 
         }

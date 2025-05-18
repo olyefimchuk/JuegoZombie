@@ -1,3 +1,4 @@
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Juego {
@@ -17,6 +18,33 @@ public class Juego {
     }
 
 
+    /**
+     * Metodo para comprobar si el usuario ha introducido un número
+     * @param sc recibe un scanner
+     * @return devuelve un número
+     */
+    public static int pedirNumero(Scanner sc) {
+        int num = 0;
+        boolean entradaValida = false;
+
+        while (!entradaValida) {
+            try{
+                num = sc.nextInt();
+                entradaValida = true;
+            }
+            catch (InputMismatchException ex) {
+                System.out.println("Debes introducir un número:");
+                sc.nextLine();
+            }
+        }
+
+        return num;
+    }
+
+    /**
+     * Metodo para avanzar a la siguiente habitacion
+     * @param jugador
+     */
     public void avanzarHabitacionSiguente(Superviviente jugador) {
         habitacionActual++;
         numIntentoBusqueda = 3;
@@ -37,7 +65,7 @@ public class Juego {
         Zombie zombie = new Zombie(puntosVida, puntosAtaque);
         
         // 2.
-        int ronda = 1;
+         int ronda = 1;
 
         System.out.println("El zombie tiene " + zombie.getPuntosAtaque() + " puntos de ataque.");
         System.out.println("El zombie tiene " + zombie.getpuntosVida() + " puntos de vida.");
@@ -73,7 +101,7 @@ public class Juego {
      * 4 curarse
      * @param jugador
      */
-    public void elegirAccionJugador(Superviviente jugador) {
+    public void elegirAccionJugador(Superviviente jugador, Juego juego) {
         Scanner sc = new Scanner(System.in);
         boolean accionValida = false;
 
@@ -86,9 +114,10 @@ public class Juego {
             System.out.println("----------------------------------------------------------------------------------------");
             System.out.println("> OPCIÓN:");
 
-            int opcion = sc.nextInt();
+            int opcion = pedirNumero(sc);
 
             switch (opcion) {
+                //combatir zombie
                 case 1 ->{
                     if (numZombieHabitacion > 0) {
                         combatirContraZombie(jugador);
@@ -97,6 +126,7 @@ public class Juego {
                         System.out.println("No hay zombies en esta habitacón para combatir.");
                     }
                 }
+                //buscar
                 case 2 ->{
                     if (numIntentoBusqueda > 0 ){
                         buscar(jugador);
@@ -105,6 +135,7 @@ public class Juego {
                         System.out.println("Ya no puedes buscar más en esta habitación.");
                     }
                 }
+                //avanzar siguiente habitacion
                 case 3 ->{
                     if (numZombieHabitacion == 0) {
                         avanzarHabitacionSiguente(jugador);
@@ -113,9 +144,10 @@ public class Juego {
                         System.out.println("Aun hay zombies. No puedes avanzar. ");
                     }
                 }
+                //curarse
                 case 4 ->{
                     if (jugador.getLLevaBotiquin()) {
-                        jugador.curarse();
+                        jugador.curarse(juego);
                         jugador.setLlevaBotiquin(false); // se consume el botiquín
                         System.out.println("Te has curado. Vida actual: " + jugador.getPuntosVidaActuales());
                         accionValida = true;
@@ -126,10 +158,7 @@ public class Juego {
                 default -> System.out.println("Opcion invalida. Elige una entre el 1 y el 4. ");
             }
         }
-    }
-
-
-    
+   }
 
     /**
      * metodo Buscar(). (busca por la habitación)
@@ -139,37 +168,42 @@ public class Juego {
      * ● 91-95: Encontramos una protección (+1).
      * ● 96-100: Encontramos un arma (+1).
      */
-    public void buscar(Superviviente jugador){
-        int resultadoDado = dado.lanzarDado(101);
-        numIntentoBusqueda --;
-        if (resultadoDado <= 75) {
-            System.out.println("Has hecho ruido...");
-            int hacerRuido= dado.lanzarDado(101);
-            if (hacerRuido <= 40) {
-                System.out.println("No ha pasado nada...");
-            } else if (hacerRuido <=80) {
-                System.out.println("Hay un zombie");
-                numZombieHabitacion++;
-            }else{
-                System.out.println("Hay 2 zombies");
-                numZombieHabitacion += 2;
-            }
-        } else if (resultadoDado <=90) {
-            if(!jugador.getLLevaBotiquin()){
-                System.out.println("Has encontrado un botiquin");
-                jugador.setLlevaBotiquin(true);
-            }else{
-                System.out.println("Has encontrado un botiqun, pero ya tienes uno. No lo puedes llevar. ");
-            }
-        } else if (resultadoDado <= 95) {
-            System.out.println("Has encotrado protección");
-            jugador.setCantProteccion(jugador.getCantProteccion() + 1);
-        }else {
-            System.out.println("Has encontrado un arma. ");
-            jugador.setCantArmas(jugador.getCantArmas() + 1);
-        }
+        public void buscar(Superviviente jugador){
+            if (numZombieHabitacion > 0) {
+                System.out.println("No puedes buscar mientras haya zombies en la habitación.");
+                return;
+            } else {
+                int resultadoDado = dado.lanzarDado(101);
+                numIntentoBusqueda--;
 
-    }
+                if (resultadoDado <= 75) {
+                    System.out.println("Has hecho ruido...");
+                    int hacerRuido = dado.lanzarDado(101);
+                    if (hacerRuido <= 40) {
+                        System.out.println("No ha pasado nada...");
+                    } else if (hacerRuido <= 80) {
+                        System.out.println("Hay un zombie");
+                        numZombieHabitacion++;
+                    } else {
+                        System.out.println("Hay 2 zombies");
+                        numZombieHabitacion += 2;
+                    }
+                } else if (resultadoDado <= 90) {
+                    if (!jugador.getLLevaBotiquin()) {
+                        System.out.println("Has encontrado un botiquín");
+                        jugador.setLlevaBotiquin(true);
+                    } else {
+                        System.out.println("Has encontrado un botiquín, pero ya tienes uno.");
+                    }
+                } else if (resultadoDado <= 95) {
+                    System.out.println("Has encontrado protección");
+                    jugador.setCantProteccion(jugador.getCantProteccion() + 1);
+                } else {
+                    System.out.println("Has encontrado un arma.");
+                    jugador.setCantArmas(jugador.getCantArmas() + 1);
+                }
+            }
+        }
 
     /**
      * ComprobarFinDeJuego()
